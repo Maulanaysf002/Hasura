@@ -1,5 +1,6 @@
-link ppt:
-sumber bacaan :
+- link ppt:
+- sumber bacaan :
+- link video youtube: https://www.youtube.com/watch?v=xiZ61BkMKo8
 
 ## Mengubah Relational Database Menjadi Grapql atau RestAPI
 
