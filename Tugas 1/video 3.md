@@ -9,7 +9,7 @@
 
 > menit 00:00 - 01:59
 
-- Perusahaaan hasura beranggotakan sekitar 180 orang di seluruh dunia.
+- Perusahaaan **Hasura** beranggotakan sekitar 180 orang di seluruh dunia.
 - Kantor pusat di San Francisco, Amerika Serikat.
 - Salah satu hal yang menjadi perhatian utama tim hasura adalah **bagaimana cara berpikir untuk membuat beberapa tim menjadi produktif, yang tentu saja merupakan topik pembicaraan yang sama yang muncul ketika kita berpikir tentang monolit hingga layanan mikro.**
 
@@ -357,13 +357,83 @@ Ketergantungan penuh pada GraphQL menciptakan risiko "lock-in" (keterikatan pada
 
 ![alt](/img/Hasura%20DDN%20-%20Data%20Supergraph%20made%20easy.png)
 
-> Menit 25:25 - 26:34
+> Menit 25:25 - 26:04
+
+**Perubahan Cara Berpikir tentang Pengelolaan Domain Data**
+
+Sebelumnya, banyak dari kita memandang pengelolaan data atau domain data sebagai solusi yang terisolasi (point solution). Misalnya, kita menambahkan lapisan API (seperti Hasura) di atas suatu sumber data atau domain tertentu untuk mengakses dan memanipulasi data tersebut. hal ini memberikan akses **API langsung ke data**, tetapi terbatas pada satu sumber data atau domain.
+
+Namun, konsep Hasura DDN mengubah paradigma ini. **DDN dirancang untuk menjadi jaringan operasional yang menghubungkan berbagai sumber data dan domain**, lalu menyediakan sebuah **Supergraph** yang menyatukan semua data tersebut ke dalam satu antarmuka yang terpadu.
+
+**Pemilik Domain**
+
+Sebagai pemilik domain atau sumber data, kita tidak perlu lagi memikirkan bagaimana membangun API yang kompleks untuk data yang kita punya. Fokus kita hanya pada hal-hal berikut:
+
+1. **Menghubungkan domain atau sumber data Anda ke DDN**.
+2. **Mendapatkan Supergraph** sebagai hasilnya, yang menyajikan data Anda dalam format yang mudah diakses dan dikelola oleh konsumen data (seperti aplikasi atau tim lain).
+
+**Supergraph** ini berfungsi sebagai lapisan abstraksi yang mengintegrasikan semua data yang terkoneksi di dalam DDN. Konsumen data hanya perlu mengakses Supergraph untuk mendapatkan data yang mereka butuhkan, tanpa perlu memahami detail teknis atau struktur masing-masing domain data.
+
+**Keunggulan DDN**
+
+- Infrastruktur yang Sederhana, DDN menyederhanakan pengelolaan data lintas domain dengan supergraph.
+
+2. Mudah Menghubungkannya, Pemilik domain hanya perlu menyambungkan data mereka ke DDN tanpa perlu membangun dan memelihara API manual.
+3. proses terpusat, Semua sumber data dikelola dalam satu jaringan yang saling terhubung, menghasilkan **Supergraph** yang konsisten.
 
 <hr>
 
 ![alt](/img/Hasura%20DDN%20-%20Data%20Supergraph%20made%20easy_2.png)
 
 > Menit 26:34 - 32:30
+
+**Perubahan Subgraph menjadi Connector**
+
+Subgraph adalah bagian dari domain yang menyediakan API untuk data tertentu. Subgraph dihasilkan oleh connector. Connector adalah alat yang menghubungkan domain atau sumber data ke DDN dan secara otomatis menghasilkan subgraph dari domain tersebut.
+
+**Subgraph** yang dihasilkan oleh berbagai connector kemudian digabungkan oleh DDN menjadi Supergraph yang mengintegrasikan semua data dari berbagai domain.
+
+**Optimisasi Performa DDN**
+
+DDN dirancang sebagai sistem serverless dan terdistribusi. Artinya:
+
+- Setiap permintaan diproses secara independen, seperti fungsi serverless (misalnya Lambda).
+- Tidak ada satu titik kegagalan (single point of failure) karena permintaan yang berat atau gagal tidak memengaruhi permintaan lain.
+- DDN menggunakan teknologi parsing GraphQL tercepat di dunia, dengan performa 4–5 kali lebih baik dibandingkan solusi lainnya. Ini mendukung pengolahan query yang efisien.
+
+Keuntungan arsitektur ini:
+
+- Mudah diskalakan (autoscale).
+- Mendukung pengoperasian multi-region dan ke depannya multi-cloud.
+- Mengurangi latensi dengan distribusi di edge locations di seluruh dunia.
+
+**Decoupling Graph dari GraphQL**
+
+Memisahkan graph (hubungan data secara semantik) dari protokol query seperti GraphQL. Menghasilkan Data yang tetap bisa diakses menggunakan berbagai protokol API lain seperti REST, gRPC, atau bahkan mekanisme seperti Kafka dan webhooks untuk kebutuhan real-time.
+
+Keuntungannya :
+
+- Fleksibilitas bagi developer untuk memilih protokol API yang sesuai.
+- Meningkatkan interoperabilitas dengan sistem yang menggunakan protokol selain GraphQL.
+
+**Connector yang Otomatis dan Efisien**
+
+Connector mempermudah pemilik domain untuk:
+
+1. Menghubungkan domain mereka ke DDN.
+2. Menghasilkan subgraph secara otomatis, tanpa perlu banyak pengaturan manual.
+3. Mengelola kontrak API secara otomatis, termasuk menangani perubahan API (API drift), sehingga beban kognitif pemilik domain menjadi minimal.
+
+Keuntungan bagi pemilik domain:
+
+- Tidak ada penguncian (lock-in): Pemilik domain tetap dapat mengakses datanya langsung kapan saja, tanpa bergantung sepenuhnya pada Supergraph.
+- Beban pengelolaan API menjadi lebih ringan karena banyak proses yang otomatis.
+
+**Prinsip Utama Hasura DDN**
+
+- **Domain-Driven Design**: Pemilik domain tetap fokus mengelola domain mereka tanpa terganggu oleh pengaturan teknis Supergraph.
+- **Otomasi Penuh**: Connector mengotomatiskan pembuatan subgraph dan mengelola API, sehingga pemilik domain tidak perlu repot.
+- **Fleksibilitas Protokol**: Data dapat diakses melalui protokol yang paling sesuai dengan kebutuhan (GraphQL, REST, gRPC, Kafka, dll.).
 
 <hr>
 
@@ -373,6 +443,38 @@ Ketergantungan penuh pada GraphQL menciptakan risiko "lock-in" (keterikatan pada
 
 > Menit 33:06 - 37:35
 
+Dalam pengelolaan data modern, kita sering dihadapkan pada kebutuhan untuk membangun lapisan tambahan seperti API GraphQL, gRPC, atau wrapper di atas data yang sudah ada.
+
+Hal ini menciptakan beban operasional tambahan, memperlambat pengembangan, dan mengalihkan fokus tim dari tugas inti mereka.
+
+**Native Data Connector (NDC) Specification**
+
+NDC adalah spesifikasi yang memungkinkan pembuatan **connector** (sebuah abstraksi sistematis untuk menghubungkan domain atau sumber data ke DDN dan mengubahnya menjadi subgraph).
+
+**Keunggulan NDC:**
+
+- Menghubungkan berbagai sumber data seperti database (PostgreSQL, MySQL) atau API (REST, gRPC, OpenAPI) untuk menghasilkan subgraph yang terstandarisasi.
+- Bisa Mengoptimalkan query, termasuk pengolahan data lintas sumber, predikat otorisasi, dan validasi.
+- Mendukung pengelolaan data yang sudah terstandarisasi dalam organisasi, misalnya standar filtering, pagination, atau spesifikasi OpenAPI.
+
+**Cara Kerja NDC**
+
+Dalam Database:
+
+- **PostgreSQL**: Memanfaatkan fitur lateral join untuk efisiensi.
+- **MySQL**: Membuat pipeline agregasi untuk query lintas data.
+
+Untuk API:
+
+- Mengonversi spesifikasi OpenAPI, gRPC, atau schema lainnya menjadi subgraph yang siap digunakan.
+- Jika organisasi sudah memiliki standar tertentu, NDC dapat disesuaikan untuk mengintegrasikan standar tersebut dengan mudah.
+
+**Prinsip Utama: Domain-Driven Design**
+
+1. Fokus utamamya adalah membiarkan pemilik domain tetap menguasai dan mengelola domain mereka tanpa beban tambahan.
+2. Subgraph menjadi perpanjangan dari domain, bukan entitas yang terpisah.
+3. Semua pengelolaan dilakukan di satu tempat (Supergraph) yang memberikan visibilitas dan kontrol terpusat.
+
 <hr>
 
 # Federated CI/CD
@@ -380,6 +482,42 @@ Ketergantungan penuh pada GraphQL menciptakan risiko "lock-in" (keterikatan pada
 ![alt](/img/Federated%20CICD.png)
 
 > Menit 38:07 - 42:46
+
+**Ketidakkonsistenan Data:**
+Misalnya, satu tim API mengembalikan userID sebagai string, sementara tim lain memerlukan userID sebagai angka. Perubahan kecil seperti ini dapat menyebabkan kerusakan kontrak tanpa disadari.
+
+**Tantangan dalam Microservices:**
+Setiap tim bekerja secara independen, sehingga sulit untuk memastikan ekspektasi konsumen layanan tetap terpenuhi di seluruh sistem.
+
+**Supergraph dengan Immutable Builds**
+
+Immutable Supergraph, yaitu Setiap perubahan pada subgraph atau metadata supergraph menghasilkan supergraph baru yang unik dan tidak dapat diubah (immutable).
+
+Contoh: Penambahan satu field akan menghasilkan URL supergraph baru secara otomatis.
+
+Manfaat:
+
+- Atomic Builds: Setiap perubahan adalah versi baru yang lengkap, memungkinkan rollback atau rollback ke versi sebelumnya dengan mudah.
+- Independensi Tim: Setiap tim dapat melakukan pengujian dan integrasi tanpa bergantung pada tim lain.
+  Blue-Green Deployment: Proses rollout dan rollback menjadi lebih aman dan fleksibel.
+
+**Keunggulan CI/CD Federasi**
+
+Shared CI/CD Environment, Dengan supergraph yang immutable, semua perubahan dapat diuji bersama tanpa menciptakan ketergantungan antar tim.
+
+Automasi Regressions Testing:
+
+- Memastikan perubahan tidak menyebabkan kerusakan API atau penurunan performa.
+- Mendukung iterasi lebih cepat dengan risiko lebih rendah.
+
+**Prinsip Utama Federated CI/CD**
+
+1. **Immutable Builds**:
+   Setiap perubahan menghasilkan supergraph baru yang unik, memastikan versi metadata dan schema dapat dikelola dengan aman.
+2. **Composability & Performance**:
+   Subgraph dan supergraph dirancang untuk dapat disusun ulang (composable) dengan tetap mempertahankan performa tinggi.
+3. **Fearless Iteration**:
+   Pengembang dapat dengan percaya diri melakukan perubahan tanpa takut merusak integrasi, berkat dukungan rollback dan automasi pengujian.
 
 <hr>
 
@@ -389,9 +527,91 @@ Ketergantungan penuh pada GraphQL menciptakan risiko "lock-in" (keterikatan pada
 
 > Menit 43:23 - 44:23
 
+**Composability**
+
+Composability adalah kemampuan suatu sistem untuk menyusun atau menggabungkan komponen-komponen yang sudah ada sehingga dapat melakukan hal-hal baru tanpa memerlukan banyak usaha tambahan.
+
+- **Contoh di GraphQL**:
+  Jika Anda memiliki model pengguna (user) dan artikel (article), Anda dapat dengan mudah membuat kueri seperti user.articles untuk mendapatkan artikel-artikel yang ditulis oleh pengguna tersebut tanpa harus membuat endpoint API baru.
+
+Keunggulan Composability:
+
+- **Efisiensi**: Mengurangi jumlah endpoint API yang perlu dibuat.
+- **Kemampuan Ekspansi**: Memberikan lebih banyak kemampuan tanpa menambah banyak kompleksitas.
+
+**Tradeoff antara Fleksibilitas dan Performa**
+
+Semakin fleksibel suatu sistem, semakin sulit untuk menjamin performanya.
+
+Contoh:
+
+- SQL: Sangat fleksibel, tetapi terkadang terlalu lambat untuk skenario tertentu.
+- NoSQL: Mengorbankan fleksibilitas untuk mendapatkan performa tinggi pada kasus tertentu.
+
+Poin Utama:
+Sistem yang sangat fleksibel (seperti GraphQL atau SQL) membutuhkan cara untuk tetap mempertahankan performa yang dapat diprediksi.
+
+**Solusi: Supergraph dan Optimasi Kinerja**
+
+Konsep supergraph memungkinkan Anda membuat query lintas subgraph (subgraph adalah unit data yang lebih kecil).
+
+Contoh:
+Anda dapat mengambil data pengguna dan untuk setiap pengguna, Anda juga mengambil data artikel yang terkait, bahkan jika data tersebut berasal dari sumber yang berbeda.
+
+Optimasi Performa:
+
+- Supergraph didukung oleh lapisan konektor (connector layer) yang memungkinkan pengoptimalan kinerja untuk skenario tertentu.
+- Fleksibilitas ini memberikan komposabilitas tanpa mengorbankan performa.
+
 ![alt](/img/Composable%20&%20Performant_2.png)
 
 > Menit 45:00 - 47:13
+
+**Permasalahan Query yang Kompleks**
+
+Dalam GraphQL, beberapa query kompleks sulit dieksekusi secara efisien karena keterbatasan teknologi seperti DataLoader atau naive GraphQL Federation.
+
+Contoh Query:
+
+Anda ingin mengambil **5 artikel terbaik untuk setiap pengguna**. Query ini membutuhkan:
+Data artikel untuk setiap pengguna.
+Sortir artikel berdasarkan kriteria tertentu dalam konteks setiap pengguna.
+Mengapa Ini Sulit?
+
+DataLoader:
+
+- Hanya mendukung "batching" atau "in-query" sederhana. Query seperti ini memerlukan pengolahan tingkat lanjut, seperti:
+- Lateral Join atau Window Function (SQL).
+- Aggregation Pipeline (NoSQL seperti MongoDB).
+- DataLoader tidak dirancang untuk menangani operasi yang memerlukan konteks pengguna atau hasil yang berbeda-beda per entitas.
+
+**DDN dan Connector**
+
+Dengan arsitektur yang melibatkan DDN (Domain Data Network) dan konektor, query semacam ini dapat dieksekusi secara efisien,
+
+bahkan jika Data berasal dari dua subgraph yang berbeda.
+Data berasal dari sumber data yang berbeda (SQL, NoSQL, API).
+
+Keuntungan Kinerja:
+
+- Untuk query sederhana dengan jumlah data kecil, performa meningkat 2-3x dibanding metode tradisional.
+- Untuk jumlah data besar, peningkatan kinerja bisa mencapai 10-15x dibanding metode lain.
+
+**Keterbatasan Metode Tradisional**
+
+- API Gateway Membutuhkan banyak panggilan API terpisah, yang meningkatkan latensi.
+- Naive GraphQL Federation:
+  - Ketika menggunakan gateway GraphQL untuk berbicara dengan beberapa server GraphQL independen, ada batasan pada protokol GraphQL.
+  - Hal ini membuat sulit untuk membuat query yang efisien karena protokol hanya mendukung query dasar.
+
+**Keunggulan Prinsip Composability**
+
+- Komposisi Predikat:
+  Anda dapat membuat query yang menggabungkan properti data, seperti mengambil artikel berdasarkan properti terkait.
+  Dulu: Hanya bisa dilakukan dalam satu subgraph.
+  Sekarang: Bisa dilakukan lintas subgraph.
+- Komposisi Jenis (Types):
+  Data dari berbagai sumber dapat digabungkan secara efisien tanpa kehilangan konteks.
 
 <br>
 <hr>
@@ -401,3 +621,36 @@ Ketergantungan penuh pada GraphQL menciptakan risiko "lock-in" (keterikatan pada
 ![alt](/img/video3_sumary.png)
 
 > Menit 48:21 - 49:29
+
+**Kesimpulan Utama**
+
+- Tujuan Utama DDN dan Connector:
+  Membantu pengguna mengintegrasikan berbagai teknologi data yang berbeda secara efisien tanpa mengorbankan kinerja atau fleksibilitas.
+
+  - **Federasi Data**: Memungkinkan penggabungan data dari berbagai sumber atau teknologi.
+  - **Kepemilikan Individual**: Setiap tim atau unit dapat mengelola sumber data mereka secara independen.
+  - **Pilihan Teknologi Terbaik**: Pengguna bebas memilih teknologi yang sesuai dengan kebutuhan mereka (contoh: ClickHouse untuk performa tinggi, Cassandra untuk data terdistribusi).
+
+- Tantangan yang Diselesaikan:
+  Banyak kasus penggunaan (seperti query kompleks lintas sumber data) sulit dilakukan secara manual atau dengan pendekatan tradisional karena:
+
+  - Kompleksitas implementasi.
+  - Tantangan dalam menjaga performa.
+
+- Solusi yang Ditawarkan:
+  Dengan teknologi seperti DDN (Data Delivery Network) dan connectors, pengguna dapat:
+
+  - Menghubungkan berbagai sumber data atau teknologi dengan mulus.
+  - Menjaga pengalaman pengguna akhir tetap konsisten, meskipun infrastruktur di belakang layar bervariasi.
+
+**Visi Masa Depan**
+
+- Membantu organisasi memanfaatkan teknologi data modern secara maksimal, tanpa harus terkunci pada solusi monolitik atau mengalami tantangan integrasi yang berat.
+
+- Teknologi ini akan tersedia dalam versi beta pada Januari, dengan rilis resmi segera setelahnya.
+
+**Pesan Akhir**
+
+- Teknologi ini dirancang untuk memberikan fleksibilitas tanpa mengorbankan kinerja.
+- Pengguna didorong untuk memilih teknologi terbaik sesuai kebutuhan mereka, sementara DDN dan connectors memastikan integrasi dan federasi data berjalan mulus.
+- Pengembang diundang untuk berdiskusi lebih lanjut melalui berbagai saluran (seperti Twitter atau email) jika memiliki pertanyaan atau ingin berbagi pengalaman.
