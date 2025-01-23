@@ -24,6 +24,24 @@
 - Sistem awalnya mungkin menggunakan **monolith API**, seperti yang dibangun dengan framework seperti Rails, Django, atau Spring Boot. API ini dirancang untuk melayani domain tertentu dengan mengintegrasikan satu atau lebih sumber data.
 - API ini digunakan oleh berbagai konsumen, seperti aplikasi internal, pengembang, aplikasi eksternal, atau bahkan API mitra.
 
+> **Penjelasan Diluar Video**
+>
+> **monolith** adalah sebuah model arsitektur di mana sebuah sistem dibangun dalam satu codebase yang sama. Misalnya pada sebuah situs belanja online terdapat beberapa bagian fitur seperti otorisasi pengguna, keranjang belanja, pembayaran, pengiriman, dan lainnya. Keseluruhan fitur tersebut dibangun secara terintegrasi pada satu codebase yang sama.
+>
+> Kelebihan Arsitektur Monolith:
+>
+> 1.  Pengembangan lebih mudah.
+> 2.  Testing dan debugging lebih mudah.
+> 3.  Deployment Lebih mudah
+>
+> Batasan Arsitektur Monolith:
+>
+> 1. Usaha ekstra untuk menjaga kode agar tetap bersih.
+> 2. Skalabilitas.
+> 3. Perubahan pada Library yang digunakan.
+>
+> [Sumber Bacaan](https://www.dicoding.com/blog/mengenal-arsitektur-monolith-kelebihan-serta-batasannya/)
+
 **Kebutuhan Skalabilitas**
 
 - Seiring waktu, kebutuhan bisnis dan teknis berkembang:
@@ -39,19 +57,35 @@
 
 **Transisi Ke Microservices**
 
-Untuk mengatasi tantangan tersebut, banyak tim memilih beralih ke microservices.
+Untuk mengatasi tantangan pada arsitektur monolith, banyak tim memilih beralih ke microservices.
 Microservices memungkinkan:
 
 - Pemecahan sistem besar menjadi layanan-layanan kecil yang independen.
 - Setiap layanan dapat dikembangkan, diuji, dan di-deploy secara terpisah.
 - Skalabilitas lebih baik karena setiap layanan dapat dioptimalkan secara terpisah sesuai kebutuhan.
 
+> **Penjelasan Diluar Video**
+>
+> **Microservices** adalah pendekatan arsitektur dalam pengembangan aplikasi, di mana aplikasi dibagi menjadi layanan-layanan kecil, masing-masing dengan tanggung jawab dan fungsi tertentu.
+>
+> Sejak diperkenalkan pada pertengahan 2000-an, arsitektur microservices berkembang pesat dan banyak digunakan oleh perusahaan besar. Aplikasi yang dibangun dengan pendekatan ini lebih fleksibel dan mudah dikembangkan. Misalnya, super-app seperti Gojek menggunakan microservices untuk mengelola berbagai fitur seperti GoRide, GoPay, dan GoFood secara mandiri.
+>
+> Kelebihan Microservices:
+>
+> 1. Kemudahan Deteksi Error dan Isolasi Masalah.
+> 2. Proses Upgrade Lebih Efisien.
+> 3. Fleksibilitas Memilih Framework.
+> 4. Mempermudah Maintenance.
+> 5. Pengembangan Paralel
+>
+> [Sumber Bacaan](https://www.biznetgio.com/news/apa-itu-microservices?gad_source=1)
+
 **Debat Monolith vs Microservices**
 
-Ada diskusi luas di komunitas teknologi tentang kapan harus menggunakan microservices:
+Ada perdebatan di dalam komunitas teknologi tentang kapan harus menggunakan microservices:
 
-- **Overengineering dengan microservices**: Menggunakan microservices sejak awal tanpa alasan yang jelas dapat meningkatkan kompleksitas.
-- **Kekuatan monolith**: Untuk sistem yang lebih sederhana atau saat skalabilitas bukan masalah utama, monolith sering kali menjadi pilihan yang lebih efisien.
+- **Pendapat Tentang microservices**: Menggunakan microservices sejak awal tanpa alasan yang jelas dapat meningkatkan kompleksitas.
+- **Pendapat Tentang monolith**: Untuk sistem yang lebih sederhana atau saat skalabilitas bukan masalah utama, monolith sering kali menjadi pilihan yang lebih efisien.
 
 **Keuntungan Microservices untuk Tim dan Inovasi**
 
