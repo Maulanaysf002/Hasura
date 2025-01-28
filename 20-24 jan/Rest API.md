@@ -69,8 +69,32 @@ Dengan kata lain, **API** adalah penghubung / perantara antar berbagai aplikasi,
 
 ## Apa itu RestAPI
 
+Rest API (Representational State Transfer Application Programming Interface) adalah API layanan website menggunakan permintaan HTTP untuk melakukan operasi CRUD (Create, Read, Update, Delete) pada data.
+
+Rest API dirancang agar sederhana dan fleksibel sehingga, memungkinkan pengembang membangun aplikasi yang dapat bekerja di berbagai bahasa dan kerangka kerja pemrograman. Salah satu fitur utama Rest API adalah penggunaan metode HTTP untuk melakukan operasi CRUD. Empat metode HTTP utama yang digunakan dalam Rest API adalah GET, POST, PUT, dan DELETE.
+
+GET digunakan untuk mengambil data dari server, POST digunakan untuk membuat data baru di server, PUT digunakan untuk memperbarui data yang ada di server, dan DELETE digunakan untuk menghapus data dari server. Rest API adalah menggunakan serangkaian batasan dan prinsip arsitektural untuk memastikannya andal, dan mudah digunakan.
+
 # Pengertian GraphQl
 
-# Endpoint
+**GraphQL** adalah **bahasa kueri** untuk API dan **runtime** untuk menjalankan kueri tersebut dengan data yang ada. GraphQL memungkinkan klien untuk meminta data yang tepat yang mereka butuhkan, tidak lebih dan tidak kurang. berbeda dengan REST, di mana klien sering kali harus membuat beberapa permintaan (mengakses endpoint) untuk mendapatkan semua data yang diperlukan.
+
+GraphQL muncul pada tahun 2012 sebagai respons terhadap kebutuhan akan kecepatan dalam platform-platform media sosial yang bermunculan.
+
+kapan harus menggunakan graphQL:
+
+- **Aplikasi mobile**: GraphQL sangat cocok untuk aplikasi mobile yang memiliki batasan bandwidth dan memerlukan data yang sangat spesifik.
+- **Aplikasi dengan antarmuka yang kompleks**: GraphQL memungkinkan Anda membangun antarmuka yang dinamis dan responsif dengan mudah.
+- **Tim pengembangan yang besar**: GraphQL dapat membantu meningkatkan efisiensi pengembangan dengan menyediakan satu sumber kebenaran untuk data.
+
+# persamaan antara GraphQL dan REST API
+
+Baik GraphQL dan REST adalah gaya arsitektur API populer yang memungkinkan pertukaran data antara berbagai layanan atau aplikasi dalam model klien-server.
+
+REST dan GraphQL dapat membuat, memodifikasi, memperbarui, dan menghapus data pada aplikasi, layanan, atau modul yang terpisah melalui API.
+
+Tim frontend dan backend menggunakan arsitektur API ini untuk membuat aplikasi yang modular dan mudah diakses. Menggunakan arsitektur API membantu menjaga sistem tetap aman, modular, dan dapat diskalakan. Hal ini juga membuat sistem memiliki performa yang lebih baik dan menjadi lebih mudah berintegrasi dengan sistem lain.
+
+[Sumber Bacaan](https://aws.amazon.com/id/compare/the-difference-between-graphql-and-rest/)
 
 # Perbedaan Rest API dan GraphQL
