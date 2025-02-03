@@ -20,6 +20,10 @@ jalankan docker-compose
 hasilnya:
 ![alt text](/img/docker_compose_hasura_up.png)
 
+tambah license untuk hasura dalam file yaml
+
+![alt](/img/hasura_add_license.png)
+
 ## Mengakses Hasura
 
 buat rule untuk https dengan host port `8080` dan guest port `8080` di virtualbox
@@ -97,3 +101,11 @@ Kemudian masuk kedalam hasura console, untuk mengconnect database mysql dan mari
 connet database postgres via database url
 
 `postgres://postgres:postgrespassword@postgres:5432/postgres` (bisa dilihat di docker-compose.yaml)
+
+## Note
+
+- jika menggunakan ip static di vm, yang diambil adalah ip dinamicnya yang muncul dalam vm.
+
+![alt](/img/ip_a_command.png)
+
+pada contoh diatas yang diambil adalah `10.50.220.249`
