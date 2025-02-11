@@ -118,8 +118,22 @@ Setiap pod ini berisi satu atau lebih container yang saling bekerja sama. **Pod-
 
     `kubectl get nodes`
 
+# Inggress pada Kubernetes
+
+https://medium.com/prastamaha/konsep-ingress-di-kubernetes-b5f55dea37db
+
 # Sumber Belajar
 
 1. [PPT Tentang Kubernetes](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbXA3aTVCTGhneUlIc1hKSTNXemNBTGlndF9Gd3xBQ3Jtc0tuempiSjZYZnRtSG10b083RXZBVmg2M1Z3TmV6MEhyVDdIQ0NUWkNac0xINE9iWHZCb0FDZVM0ZW1DaGlONkdOUXNfLWhkUTI4WlZoRkNRcDhyNFhCU1c0S3V5dHVmTFMzUy00YVhaU3FOSEZ2VnRQRQ&q=https%3A%2F%2Fdocs.google.com%2Fpresentation%2Fd%2F15cPaGS_nRWF1iK2RRfrvudlN7mYQJBL5eX0g8CI45iM%2Fedit%3Fusp%3Dsharing&v=7zInpQfPRqo)
 
 2. [link video youtube](https://www.youtube.com/watch?v=7zInpQfPRqo&t=11s)
+
+3. https://medium.com/prastamaha/konsep-dasar-kubernetes-ddcd5a2cbc5a
+
+4. https://medium.com/prastamaha/konsep-kubernetes-service-8ed69987b280
+
+5. https://medium.com/prastamaha/konfigurasi-kubernetes-secret-pada-pod-1655fa4c981d
+
+6. https://medium.com/prastamaha/konsep-volume-di-kubernetes-a95c7bc33200
+
+7. [kumpulan buku kubernetes](https://github.com/cmupitts/ebooks_4/tree/master/dev-ops/kubernetes)
