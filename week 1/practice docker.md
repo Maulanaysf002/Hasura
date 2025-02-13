@@ -42,7 +42,7 @@ Update Apt
 
 Install Docker Compose dengan CURL
 
-`sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
+`sudo curl -SL https://github.com/docker/compose/releases/download/v2.32.4/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose`
 
 Berikan Izin Eksekusi pada file tempat menyimpan docker compose
 
@@ -58,4 +58,4 @@ Verivikasi Installasi
 
 Hasilnya:
 
-![alt](/img/docker_compose_version.png)
+![alt](/img/installasi_docker_compose.png)
